@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-10T12:16:31.708Z",
+ "changedAt": "2026-10-10T13:35:54.149Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -130,8 +130,8 @@
    "round": "3",
    "black": "河野高久",
    "white": "岡部寛",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-86"
   },
   {
    "id": "6ac9f25d1217a7053efaf768",
@@ -163,8 +163,8 @@
    "round": "3",
    "black": "高嶋純也",
    "white": "河村典彦",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "black-89"
   }
  ]
 }
