@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-10T11:55:12.015Z",
+ "changedAt": "2026-10-10T12:07:22.773Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -141,8 +141,8 @@
    "round": "3",
    "black": "牧野光則",
    "white": "松田将馬",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-41"
   },
   {
    "id": "6ac9f25d1217a7053efaf769",
