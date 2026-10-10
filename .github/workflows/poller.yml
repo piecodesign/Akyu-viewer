@@ -1,0 +1,59 @@
+name: 棋譜一覧の取得（大会中は1分おき）
+
+# 大会期間中は1回の実行で約50分間、1分おきに RenjuPortal を確認する。
+# 終わる前に自分自身を起動し直すので、GitHub の定期実行に頼らず動き続ける。
+# 止まってしまったときは Actions タブからこのワークフローを Run workflow すれば再開する。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"   # 万一つながりが切れたときの予備（1時間おき）
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: poller
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 1分おきに取得
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          end=$(( $(date +%s) + 50*60 ))
+          while [ "$(date +%s)" -lt "$end" ]; do
+            if ! node scripts/in-window.mjs; then
+              echo "大会期間外なので終了します"
+              echo "OUT_OF_WINDOW=1" >> "$GITHUB_ENV"
+              break
+            fi
+            node scripts/update-games.mjs || echo "取得に失敗（次の回で再試行）"
+            if ! git diff --quiet -- data/games.json; then
+              git add data/games.json
+              git commit -q -m "棋譜一覧を更新"
+              git pull -q --rebase origin main && git push -q origin HEAD:main \
+                && gh workflow run update.yml --ref main \
+                || echo "保存に失敗（次の回で再試行）"
+            fi
+            sleep 60
+          done
+
+      - name: 次の回を起動
+        if: env.OUT_OF_WINDOW != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run poller.yml --ref main
