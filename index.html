@@ -82,7 +82,7 @@ main{display:grid;gap:10px;padding:10px 16px 16px;grid-template-columns:repeat(v
 import { groupRounds, outcome } from "./lib.mjs";
 
 const BASE = "https://renjuportal.com/score/";
-const POLL_MS = 60000;
+const POLL_MS = 30000;
 const $ = (s) => document.querySelector(s);
 const fmt = (d) => new Intl.DateTimeFormat("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }).format(d);
 
