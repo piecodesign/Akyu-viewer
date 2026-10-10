@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-10T09:25:11.607Z",
+ "changedAt": "2026-10-10T11:55:12.015Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -119,8 +119,8 @@
    "round": "3",
    "black": "久家彰夫",
    "white": "中山智晴",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-38"
   },
   {
    "id": "6ac9f25d1217a7053efaf767",
