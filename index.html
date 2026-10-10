@@ -95,9 +95,17 @@ async function getJSON(path) {
   return r.json();
 }
 
+// 「最新（自動）」で表示するラウンド：棋譜がある最新ラウンドと、
+// 開始10分前を過ぎた最新ラウンドの、どちらか新しいほう（棋譜が未着でも開始10分前に切り替える）
+const SWITCH_BEFORE_MS = 10 * 60000;
 function latestRound() {
   const withGames = config.rounds.filter((r) => rounds[r.no]?.length);
-  return withGames.length ? withGames.at(-1).no : null;
+  const byGames = withGames.length ? withGames.at(-1).no : 0;
+  const now = Date.now();
+  const due = now < Date.parse(config.until)
+    ? config.rounds.filter((r) => Date.parse(r.start) - SWITCH_BEFORE_MS <= now) : [];
+  const byTime = due.length ? due.at(-1).no : 0;
+  return Math.max(byGames, byTime) || null;
 }
 // 開始時刻（の判定開始）を過ぎたのに棋譜がまだ無いラウンド
 function waitingRound(latest) {
@@ -123,10 +131,12 @@ function renderStatus(no) {
   const parts = [];
   if (no) {
     const r = config.rounds.find((x) => x.no === no);
-    const live = (rounds[no] || []).some((g) => outcome(g).key === "live");
-    parts.push(`<b>R${no}</b> ${fmt(new Date(r.start))}開始 ・ ${rounds[no].length}局${live ? ` ・ <span class="dot"></span>対局中あり` : " ・ 全局終了"}`);
+    const list = rounds[no] || [];
+    const live = list.some((g) => outcome(g).key === "live");
+    if (list.length) parts.push(`<b>R${no}</b> ${fmt(new Date(r.start))}開始 ・ ${list.length}局${live ? ` ・ <span class="dot"></span>対局中あり` : " ・ 全局終了"}`);
+    else parts.push(`<b>R${no}</b> ${fmt(new Date(r.start))}開始 ・ 棋譜の登録を待っています（登録されると1分ほどで表示されます）`);
   }
-  if (mode === "live" && wait) parts.push(`R${wait.no}の棋譜を待っています（登録されると数分で切り替わります）`);
+  if (mode === "live" && wait && wait.no !== no) parts.push(`R${wait.no}の棋譜を待っています（登録されると数分で切り替わります）`);
   $("#status").innerHTML = parts.join("　") || "まだ棋譜がありません";
 }
 
@@ -151,7 +161,7 @@ function renderGrid(no) {
   }
   shown = key;
   grid.innerHTML = "";
-  if (!games.length) { grid.innerHTML = '<p class="notice">このラウンドの棋譜はまだありません</p>'; return; }
+  if (!games.length) { grid.innerHTML = '<p class="notice">このラウンドの棋譜はまだ登録されていません。登録されると自動で表示されます。</p>'; return; }
   for (const g of games) {
     const slot = document.createElement("div"); slot.className = "slot";
     const view = document.createElement("div"); view.className = "view";
