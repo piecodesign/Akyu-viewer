@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T09:04:10.022Z",
+ "changedAt": "2026-10-11T09:04:44.403Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -304,8 +304,8 @@
    "createdAt": "2026-10-11T08:33:38.148Z",
    "title": "64th Meijinsen Tournament",
    "round": "6",
-   "black": "岡部寛",
-   "white": "中山智晴",
+   "black": "中山智晴",
+   "white": "岡部寛",
    "result": "-",
    "endNumber": "-"
   }
