@@ -48,21 +48,14 @@ main{display:grid;gap:10px;padding:10px 16px 16px;grid-template-columns:repeat(v
 .bar a,.bar button{font-size:11px;padding:1px 7px}
 .bar a{color:var(--accent)}
 .view{position:relative;overflow:hidden;background:var(--frame);height:var(--h,560px)}
-/* --ze：その枠で実際に使う縮小率。RenjuPortal が細い画面用の配置（別の棋譜へ移るボタンが手のボタンの近くに来る）に
-   ならないよう、中身の横幅が最低 MIN_PORTAL_W になるまで自動で縮める */
-.view iframe{position:absolute;left:0;border:0;background:#fff;width:calc(100% / var(--ze,var(--z,1)));
-  height:calc((var(--h,560px) + var(--off,0px) + var(--adj,0px)) / var(--ze,var(--z,1)));top:calc((var(--off,0px) + var(--adj,0px)) * -1);transform:scale(var(--ze,var(--z,1)));transform-origin:0 0}
-/* RenjuPortal の盤の左右にある大きな「‹ ›」は、手の戻し・進めではなく一覧の前後の棋譜（別の対局）へ移動するボタン。
-   押し間違えると別の対局に切り替わってしまうので、透明な板で覆って押せないようにする */
-.guard{position:absolute;top:0;bottom:0;width:calc(96px * var(--ze,var(--z,1)));z-index:2;cursor:not-allowed}
-.guard.l{left:calc(50% - 402px * var(--ze,var(--z,1)))}
-.guard.r{left:calc(50% + 306px * var(--ze,var(--z,1)))}
+.view iframe{position:absolute;left:0;border:0;background:#fff;width:calc(100% / var(--z,1));
+  height:calc((var(--h,560px) + var(--off,0px) + var(--adj,0px)) / var(--z,1));top:calc((var(--off,0px) + var(--adj,0px)) * -1);transform:scale(var(--z,1));transform-origin:0 0}
 .nudge{display:inline-flex;align-items:center;gap:2px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 .nudge button{padding:1px 6px;line-height:1.2}
 .nudge output{min-width:2.6em;text-align:center}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .notice{grid-column:1/-1;color:var(--muted);padding:40px 0;text-align:center}
-@media (max-width:700px){main{grid-template-columns:1fr}.names{flex-basis:100%}}
+@media (max-width:700px){main{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -175,11 +168,6 @@ function renderGrid(no) {
     const fr = document.createElement("iframe");
     fr.src = BASE + g.sid; fr.title = `${g.black} 対 ${g.white}`;
     view.appendChild(fr);
-    for (const side of ["l", "r"]) {
-      const gd = document.createElement("div"); gd.className = "guard " + side;
-      gd.title = "このボタンは別の対局へ移動するため、ビューワーでは押せないようにしています";
-      view.appendChild(gd);
-    }
     const bar = slotHTML(g); bar.append(...extraButtons(g, fr));
     slot.append(bar, view); grid.appendChild(slot);
   }
@@ -214,7 +202,6 @@ function render() {
   const no = mode === "live" ? latestRound() : Number(mode);
   renderStatus(no);
   renderGrid(no);
-  fitViews();
 }
 
 async function refresh() {
@@ -238,16 +225,6 @@ $("#toggleDisplay").onclick = (e) => { const d = $("#display"); d.hidden = !d.hi
 // 表示の調整（各自のブラウザに保存）
 const ctl = ["zoom", "off", "hgt", "cols"];
 try { const p = JSON.parse(localStorage.getItem("m5prefs") || "{}"); ctl.forEach((k) => p[k] != null && ($("#" + k).value = p[k])); } catch {}
-// 0 にすると自動縮小をしない（スマホで盤が小さくなりすぎるため 0。720 にすると細い画面でも横長配置になる）
-const MIN_PORTAL_W = 0;
-function fitViews() {
-  const z = Number($("#zoom").value) / 100;
-  document.querySelectorAll(".view").forEach((v) => {
-    const w = v.clientWidth;
-    if (w) v.style.setProperty("--ze", (MIN_PORTAL_W ? Math.min(z, w / MIN_PORTAL_W) : z).toFixed(4));
-  });
-}
-window.addEventListener("resize", fitViews);
 function applyPrefs() {
   const v = Object.fromEntries(ctl.map((k) => [k, $("#" + k).value]));
   const st = document.documentElement.style;
@@ -255,7 +232,6 @@ function applyPrefs() {
   $("#grid").style.setProperty("--cols", v.cols);
   $("#zoomV").textContent = v.zoom + "%"; $("#offV").textContent = v.off + "px"; $("#hgtV").textContent = v.hgt + "px";
   try { localStorage.setItem("m5prefs", JSON.stringify(v)); } catch {}
-  fitViews();
 }
 ctl.forEach((k) => $("#" + k).addEventListener("input", applyPrefs));
 applyPrefs();
