@@ -45,16 +45,19 @@ jobs:
           while [ "$(date +%s)" -lt "$end" ]; do
             if ! node scripts/in-window.mjs; then
               echo "大会期間外なので終了します"
-              echo "OUT_OF_WINDOW=1" >> "$GITHUB_ENV"
               break
             fi
-            node scripts/update-games.mjs || echo "取得に失敗（次の回で再試行）"
+            # 毎回 GitHub 上の最新に合わせてから取得する。保存に失敗しても次の回でもう一度試すので、取りこぼさない
+            git fetch -q origin main && git reset -q --hard origin/main || echo "最新の取得に失敗"
+            node scripts/update-games.mjs || echo "棋譜一覧の取得に失敗（次の回で再試行）"
             if ! git diff --quiet -- data/games.json; then
               git add data/games.json
               git commit -q -m "棋譜一覧を更新"
-              git pull -q --rebase origin main && git push -q origin HEAD:main \
-                && gh workflow run update.yml --ref main \
-                || echo "保存に失敗（次の回で再試行）"
+              if git push -q origin HEAD:main; then
+                gh workflow run update.yml --ref main || echo "公開の呼び出しに失敗"
+              else
+                echo "保存に失敗（次の回で再試行）"
+              fi
             fi
             sleep "$(node scripts/interval.mjs)"
           done

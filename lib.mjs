@@ -83,17 +83,51 @@ export function gameRound(game, config) {
   return roundOf(game.createdAt, config);
 }
 
-// ラウンドごとにまとめる。同じ対戦が重複したら新しいほうを残す
+// ラウンドごとにまとめる。
+// 総当たりなので同じ組み合わせは大会中に1局だけ。同じ組み合わせが複数あれば新しいほうを残す。
+// ラウンドの決め方：
+//   1. 棋譜に書かれたラウンド番号（round 欄、なければ題名の「R◯」）
+//   2. 番号が無いときは対局者から推定：2人とも前のラウンドまでに打った局の次のラウンド
+//      （各選手は毎ラウンド1局ずつ打つので、作成時刻がずれていても判別できる）
+//   3. それでも決まらないときだけ作成時刻
 export function groupRounds(games, config) {
-  const map = new Map(config.rounds.map((r) => [r.no, new Map()]));
+  const nos = config.rounds.map((r) => r.no);
+  const valid = new Set(nos);
+  const byPair = new Map();
   for (const g of games) {
-    const no = gameRound(g, config);
-    if (no == null || !map.has(no)) continue;
     const key = [g.black, g.white].sort().join("|");
-    const cur = map.get(no).get(key);
-    if (!cur || g.createdAt > cur.createdAt) map.get(no).set(key, g);
+    const cur = byPair.get(key);
+    if (!cur || g.createdAt > cur.createdAt) byPair.set(key, g);
+  }
+  const list = [...byPair.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id));
+
+  const assigned = new Map();             // game.id -> round
+  const playerRounds = new Map();         // player -> Set(round)
+  const mark = (g, no) => {
+    assigned.set(g.id, no);
+    for (const p of [g.black, g.white]) {
+      if (!playerRounds.has(p)) playerRounds.set(p, new Set());
+      playerRounds.get(p).add(no);
+    }
+  };
+  const explicit = (g) => {
+    const f = parseInt(String(g.round || "").replace(/\D/g, ""), 10);
+    if (valid.has(f)) return f;
+    const m = String(g.title || "").match(/R\s*(\d+)/i);
+    return m && valid.has(Number(m[1])) ? Number(m[1]) : null;
+  };
+  // 1. 番号のある棋譜を先に確定
+  for (const g of list) { const no = explicit(g); if (no != null) mark(g, no); }
+  // 2. 番号の無い棋譜は対局者から推定（作成順に）
+  for (const g of list) {
+    if (assigned.has(g.id)) continue;
+    const used = (p) => playerRounds.get(p) || new Set();
+    const last = Math.max(0, ...used(g.black), ...used(g.white));
+    let no = nos.find((n) => n > last && !used(g.black).has(n) && !used(g.white).has(n));
+    if (no == null) no = roundOf(g.createdAt, config);   // 3. 最後の手段
+    if (no != null && valid.has(no)) mark(g, no);
   }
   const out = {};
-  for (const [no, m] of map) out[no] = [...m.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  for (const n of nos) out[n] = list.filter((g) => assigned.get(g.id) === n);
   return out;
 }
