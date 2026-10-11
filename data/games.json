@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T23:28:24.384Z",
+ "changedAt": "2026-10-11T23:28:59.281Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -372,6 +372,17 @@
    "round": "7",
    "black": "汪清清",
    "white": "高嶋純也",
+   "result": "-",
+   "endNumber": "-"
+  },
+  {
+   "id": "6acc1acc2b514f8026e7eb0b",
+   "sid": "gz7DEp9UJQUTRyBv",
+   "createdAt": "2026-10-11T23:25:00.058Z",
+   "title": "64th Meijinsen Tournament",
+   "round": "7",
+   "black": "牧野光則",
+   "white": "河野高久",
    "result": "-",
    "endNumber": "-"
   }
