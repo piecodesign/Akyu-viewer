@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T12:02:40.311Z",
+ "changedAt": "2026-10-11T12:15:04.110Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -295,8 +295,8 @@
    "round": "6",
    "black": "河野高久",
    "white": "松田将馬",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-35"
   },
   {
    "id": "6acb49e2f42c35263aa2d90f",
