@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T10:46:28.535Z",
+ "changedAt": "2026-10-11T12:02:40.311Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -306,8 +306,8 @@
    "round": "6",
    "black": "汪清清",
    "white": "久家彰夫",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-63"
   },
   {
    "id": "6acb49e2f42c35263aa2d910",
