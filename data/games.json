@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T09:39:20.740Z",
+ "changedAt": "2026-10-11T10:24:55.480Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -317,8 +317,8 @@
    "round": "6",
    "black": "高嶋純也",
    "white": "井上史也",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-42"
   },
   {
    "id": "6acb49e2f42c35263aa2d911",
