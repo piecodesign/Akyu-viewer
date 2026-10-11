@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T05:59:15.877Z",
+ "changedAt": "2026-10-11T06:23:49.326Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -240,8 +240,8 @@
    "round": "5",
    "black": "中山智晴",
    "white": "汪清清",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-23"
   },
   {
    "id": "6acadd6198b25acfc2a0b6e7",
@@ -251,8 +251,8 @@
    "round": "5",
    "black": "牧野光則",
    "white": "高嶋純也",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-23"
   },
   {
    "id": "6acadd6198b25acfc2a0b6e8",
