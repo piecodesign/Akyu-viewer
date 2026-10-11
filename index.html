@@ -238,12 +238,13 @@ $("#toggleDisplay").onclick = (e) => { const d = $("#display"); d.hidden = !d.hi
 // 表示の調整（各自のブラウザに保存）
 const ctl = ["zoom", "off", "hgt", "cols"];
 try { const p = JSON.parse(localStorage.getItem("m5prefs") || "{}"); ctl.forEach((k) => p[k] != null && ($("#" + k).value = p[k])); } catch {}
-const MIN_PORTAL_W = 720;
+// 0 にすると自動縮小をしない（スマホで盤が小さくなりすぎるため 0。720 にすると細い画面でも横長配置になる）
+const MIN_PORTAL_W = 0;
 function fitViews() {
   const z = Number($("#zoom").value) / 100;
   document.querySelectorAll(".view").forEach((v) => {
     const w = v.clientWidth;
-    if (w) v.style.setProperty("--ze", Math.min(z, w / MIN_PORTAL_W).toFixed(4));
+    if (w) v.style.setProperty("--ze", (MIN_PORTAL_W ? Math.min(z, w / MIN_PORTAL_W) : z).toFixed(4));
   });
 }
 window.addEventListener("resize", fitViews);
