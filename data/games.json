@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T07:15:39.349Z",
+ "changedAt": "2026-10-11T08:40:51.733Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -273,8 +273,8 @@
    "round": "5",
    "black": "久家彰夫",
    "white": "井上史也",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "white-88"
   }
  ]
 }
