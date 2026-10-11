@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T06:23:49.326Z",
+ "changedAt": "2026-10-11T07:15:39.349Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -229,8 +229,8 @@
    "round": "5",
    "black": "松田将馬",
    "white": "岡部寛",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-68"
   },
   {
    "id": "6acadd6198b25acfc2a0b6e6",
