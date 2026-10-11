@@ -72,12 +72,23 @@ export function isTarget(game, authorId, config) {
   return set.has(game.black) && set.has(game.white);
 }
 
+// 棋譜のラウンド：ラウンド番号（round 欄、なければ題名の「R◯」）があればそれを優先し、
+// 無いときだけ作成時刻で判定する（棋譜が開始の何時間も前に作られることがあるため）
+export function gameRound(game, config) {
+  const nos = new Set(config.rounds.map((r) => r.no));
+  const fromField = parseInt(String(game.round || "").replace(/\D/g, ""), 10);
+  if (nos.has(fromField)) return fromField;
+  const m = String(game.title || "").match(/R\s*(\d+)/i);
+  if (m && nos.has(Number(m[1]))) return Number(m[1]);
+  return roundOf(game.createdAt, config);
+}
+
 // ラウンドごとにまとめる。同じ対戦が重複したら新しいほうを残す
 export function groupRounds(games, config) {
   const map = new Map(config.rounds.map((r) => [r.no, new Map()]));
   for (const g of games) {
-    const no = roundOf(g.createdAt, config);
-    if (no == null) continue;
+    const no = gameRound(g, config);
+    if (no == null || !map.has(no)) continue;
     const key = [g.black, g.white].sort().join("|");
     const cur = map.get(no).get(key);
     if (!cur || g.createdAt > cur.createdAt) map.get(no).set(key, g);
