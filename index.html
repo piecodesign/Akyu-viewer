@@ -50,6 +50,11 @@ main{display:grid;gap:10px;padding:10px 16px 16px;grid-template-columns:repeat(v
 .view{position:relative;overflow:hidden;background:var(--frame);height:var(--h,560px)}
 .view iframe{position:absolute;left:0;border:0;background:#fff;width:calc(100% / var(--z,1));
   height:calc((var(--h,560px) + var(--off,0px) + var(--adj,0px)) / var(--z,1));top:calc((var(--off,0px) + var(--adj,0px)) * -1);transform:scale(var(--z,1));transform-origin:0 0}
+/* RenjuPortal の盤の左右にある大きな「‹ ›」は、手の戻し・進めではなく一覧の前後の棋譜（別の対局）へ移動するボタン。
+   押し間違えると別の対局に切り替わってしまうので、透明な板で覆って押せないようにする */
+.guard{position:absolute;top:0;bottom:0;width:calc(96px * var(--z,1));z-index:2;cursor:not-allowed}
+.guard.l{left:calc(50% - 402px * var(--z,1))}
+.guard.r{left:calc(50% + 306px * var(--z,1))}
 .nudge{display:inline-flex;align-items:center;gap:2px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 .nudge button{padding:1px 6px;line-height:1.2}
 .nudge output{min-width:2.6em;text-align:center}
@@ -168,6 +173,11 @@ function renderGrid(no) {
     const fr = document.createElement("iframe");
     fr.src = BASE + g.sid; fr.title = `${g.black} 対 ${g.white}`;
     view.appendChild(fr);
+    for (const side of ["l", "r"]) {
+      const gd = document.createElement("div"); gd.className = "guard " + side;
+      gd.title = "このボタンは別の対局へ移動するため、ビューワーでは押せないようにしています";
+      view.appendChild(gd);
+    }
     const bar = slotHTML(g); bar.append(...extraButtons(g, fr));
     slot.append(bar, view); grid.appendChild(slot);
   }
