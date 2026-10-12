@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T10:56:50.609Z",
+ "changedAt": "2026-10-12T11:43:39.099Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -449,8 +449,8 @@
    "round": "9",
    "black": "河野高久",
    "white": "中山智晴",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "white-72"
   },
   {
    "id": "6acc1f0fae6382cb7d0a38bb",
