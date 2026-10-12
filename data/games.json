@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T07:25:14.938Z",
+ "changedAt": "2026-10-12T07:40:29.155Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -438,8 +438,8 @@
    "round": "8",
    "black": "松田将馬",
    "white": "河村典彦",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-72"
   }
  ]
 }
