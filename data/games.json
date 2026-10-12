@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T10:48:15.293Z",
+ "changedAt": "2026-10-12T10:56:50.609Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -460,8 +460,8 @@
    "round": "9",
    "black": "井上史也",
    "white": "牧野光則",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-23"
   },
   {
    "id": "6acc1f0fae6382cb7d0a38bc",
