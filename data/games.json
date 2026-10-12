@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-11T23:40:54.364Z",
+ "changedAt": "2026-10-12T00:38:51.494Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -361,8 +361,8 @@
    "round": "7",
    "black": "中山智晴",
    "white": "河村典彦",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "black-51"
   },
   {
    "id": "6acc1acc2b514f8026e7eb0a",
