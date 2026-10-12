@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T07:13:00.928Z",
+ "changedAt": "2026-10-12T07:22:09.786Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -416,8 +416,8 @@
    "round": "8",
    "black": "井上史也",
    "white": "河野高久",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "white-68"
   },
   {
    "id": "6acc1f0e5d81ff5165757ac5",
