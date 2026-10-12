@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T06:39:18.029Z",
+ "changedAt": "2026-10-12T07:13:00.928Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -394,8 +394,8 @@
    "round": "8",
    "black": "久家彰夫",
    "white": "岡部寛",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "white-46"
   },
   {
    "id": "6acc1f0e5d81ff5165757ac3",
