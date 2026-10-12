@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T00:38:51.494Z",
+ "changedAt": "2026-10-12T01:42:56.227Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -350,8 +350,8 @@
    "round": "7",
    "black": "岡部寛",
    "white": "井上史也",
-   "result": "-",
-   "endNumber": "-"
+   "result": "resign",
+   "endNumber": "white-46"
   },
   {
    "id": "6acc1acc2b514f8026e7eb09",
