@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T09:09:26.736Z",
+ "changedAt": "2026-10-12T10:23:56.894Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -493,8 +493,8 @@
    "round": "9",
    "black": "汪清清",
    "white": "岡部寛",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "white-26"
   }
  ]
 }
