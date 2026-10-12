@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T12:24:24.072Z",
+ "changedAt": "2026-10-12T13:02:17.041Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -471,8 +471,8 @@
    "round": "9",
    "black": "高嶋純也",
    "white": "松田将馬",
-   "result": "-",
-   "endNumber": "-"
+   "result": "draw",
+   "endNumber": "black-125"
   },
   {
    "id": "6acc1f0fae6382cb7d0a38bd",
