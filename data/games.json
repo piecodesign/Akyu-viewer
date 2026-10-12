@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T04:39:22.422Z",
+ "changedAt": "2026-10-12T05:47:24.385Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -84,8 +84,8 @@
    "createdAt": "2026-10-10T04:06:38.760Z",
    "title": "64th Meijinsen Tournament",
    "round": "2",
-   "black": "久家彰夫",
-   "white": "牧野光則",
+   "black": "牧野光則",
+   "white": "久家彰夫",
    "result": "forbidden",
    "endNumber": "black-81"
   },
