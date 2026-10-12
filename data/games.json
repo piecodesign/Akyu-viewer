@@ -1,5 +1,5 @@
 {
- "changedAt": "2026-10-12T08:48:08.092Z",
+ "changedAt": "2026-10-12T08:52:16.892Z",
  "games": [
   {
    "id": "6ac97202a319a0f4ea37946c",
@@ -440,6 +440,39 @@
    "white": "河村典彦",
    "result": "resign",
    "endNumber": "white-72"
+  },
+  {
+   "id": "6acc1f0fae6382cb7d0a38bb",
+   "sid": "gz7JTlDEMIHHKeYF",
+   "createdAt": "2026-10-11T23:43:11.153Z",
+   "title": "64th Meijinsen Tournament",
+   "round": "9",
+   "black": "井上史也",
+   "white": "牧野光則",
+   "result": "-",
+   "endNumber": "-"
+  },
+  {
+   "id": "6acc1f0fae6382cb7d0a38bc",
+   "sid": "gz7JTlDEMIHHKeYG",
+   "createdAt": "2026-10-11T23:43:11.154Z",
+   "title": "64th Meijinsen Tournament",
+   "round": "9",
+   "black": "松田将馬",
+   "white": "高嶋純也",
+   "result": "-",
+   "endNumber": "-"
+  },
+  {
+   "id": "6acc1f0fae6382cb7d0a38bd",
+   "sid": "gz7JTlDEMIHHKeYH",
+   "createdAt": "2026-10-11T23:43:11.155Z",
+   "title": "64th Meijinsen Tournament",
+   "round": "9",
+   "black": "河村典彦",
+   "white": "久家彰夫",
+   "result": "-",
+   "endNumber": "-"
   }
  ]
 }
